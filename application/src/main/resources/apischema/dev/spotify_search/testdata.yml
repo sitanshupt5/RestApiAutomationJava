@@ -1,0 +1,83 @@
+verifyArtistDetailsArijitSingh:
+  search_param : "Arijit Singh"
+  param_type: "artist"
+  market: "IN"
+  limit: 1
+  'AssertArtist': "Arijit Singh"
+  'AssertArtistId': "4YRxDV8wJFPHPTeXepOstw"
+  'AssertGenres': ["filmi", "modern bollywood"]
+  'AssertObjectType': "artist"
+
+verifyArtistDetailsSonuNigam:
+  search_param : "Sonu Nigam"
+  param_type: "artist"
+  market: "IN"
+  limit: 1
+  'AssertArtist': "Sonu Nigam"
+  'AssertArtistId': "1dVygo6tRFXC8CSWURQJq2"
+  'AssertGenres': ["filmi", "modern bollywood"]
+  'AssertObjectType': "artist"
+
+verifyArtistDetailsShreyaGhoshal:
+  search_param : "Shreya Ghoshal"
+  param_type: "artist"
+  market: "IN"
+  limit: 1
+  'AssertArtist': "Shreya Ghoshal"
+  'AssertArtistId': "0oOet2f43PA68X5RxKobEy"
+  'AssertGenres': ["filmi", "modern bollywood"]
+  'AssertObjectType': "artist"
+
+verifyArtistDetailsKishoreKumar:
+  search_param : "Kishore Kumar"
+  param_type: "artist"
+  market: "IN"
+  limit: 1
+  'AssertArtist': "Kishore Kumar"
+  'AssertArtistId': "0GF4shudTAFv8ak9eWdd4Y"
+  'AssertGenres': ['classic bollywood', 'filmi']
+  'AssertObjectType': "artist"
+
+verifyAlbumDetailsAashiqui2:
+  search_param : "Aashiqui 2"
+  param_type: "album"
+  market: "IN"
+  limit: 1
+  'AssertAlbum': "Aashiqui 2"
+  'AssertAlbumId': "0Rkv5iqjF2uenfL0OVB8hg"
+  'AssertReleaseDate': "2013-04-06"
+  'AssertObjectType': "album"
+  'AssertTotalTracks': 12
+
+verifyAlbumDetailsChakDeIndia:
+  search_param : "Chak De India"
+  param_type: "album"
+  market: "IN"
+  limit: 1
+  'AssertAlbum': "Chak De India"
+  'AssertAlbumId': "5KXiMrupdPZf2sR6WrZTvh"
+  'AssertReleaseDate': "2007-08-01"
+  'AssertObjectType': "album"
+  'AssertTotalTracks': 7
+
+verifyAlbumDetailsVeerZaara:
+  search_param : "Veer - Zaara"
+  param_type: "album"
+  market: "IN"
+  limit: 1
+  'AssertAlbum': "Veer - Zaara"
+  'AssertAlbumId': "690w3h4czL3x3W3zIgEcB6"
+  'AssertReleaseDate': "2004-09-18"
+  'AssertObjectType': "album"
+  'AssertTotalTracks': 11
+
+verifyAlbumDetailsRHTDM:
+  search_param : "Rehnaa Hai Terre Dil Mein"
+  param_type: "album"
+  market: "IN"
+  limit: 1
+  'AssertAlbum': "Rehnaa Hai Terre Dil Mein"
+  'AssertAlbumId': "2wYCe7tPgYvU2A1o6iF9hx"
+  'AssertReleaseDate': "2001-10-19"
+  'AssertObjectType': "album"
+  'AssertTotalTracks': 12

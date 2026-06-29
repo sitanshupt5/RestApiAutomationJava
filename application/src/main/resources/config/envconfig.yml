@@ -1,0 +1,11 @@
+commonconfigs:
+  relaxed_https: 'true'
+  url_encoding_enabled: 'true'
+  max_timeout: '60'
+  polling_time: '5'
+dev:
+  host_uri: "https://api.spotify.com/"
+  follow_redirects: 'false'
+  auth_url: "https://accounts.spotify.com/api/token"
+  auth_client_id: "741b43fa9e074083846009494d9edf85"
+  auth_client_secret: "57aadc4f529e44348066130888b4adac"

@@ -1,0 +1,51 @@
+verifyArtistDetailsArijitSingh:
+  'AssertArtist': "artists.items[0].name"
+  'AssertArtistId': "artists.items[0].id"
+  'AssertGenres': "artists.items[0].genres"
+  'AssertObjectType': "artists.items[0].type"
+
+verifyArtistDetailsSonuNigam:
+  'AssertArtist': "$.artists.items[0].name"
+  'AssertArtistId': "$.artists.items[0].id"
+  'AssertGenres': "$.artists.items[0].genres"
+  'AssertObjectType': "$.artists.items[0].type"
+
+verifyArtistDetailsShreyaGhoshal:
+  'AssertArtist': "$.artists.items[0].name"
+  'AssertArtistId': "$.artists.items[0].id"
+  'AssertGenres': "$.artists.items[0].genres"
+  'AssertObjectType': "$.artists.items[0].type"
+
+verifyArtistDetailsKishoreKumar:
+  'AssertArtist': "$.artists.items[0].name"
+  'AssertArtistId': "$.artists.items[0].id"
+  'AssertGenres': "$.artists.items[0].genres"
+  'AssertObjectType': "$.artists.items[0].type"
+
+verifyAlbumDetailsAashiqui2:
+  'AssertAlbum': "$.albums.items[0].name"
+  'AssertAlbumId': "$.albums.items[0].id"
+  'AssertReleaseDate': "$.albums.items[0].release_date"
+  'AssertObjectType': "$.albums.items[0].type"
+  'AssertTotalTracks': "$.albums.items[0].total_tracks"
+
+verifyAlbumDetailsChakDeIndia:
+  'AssertAlbum': "$.albums.items[0].name"
+  'AssertAlbumId': "$.albums.items[0].id"
+  'AssertReleaseDate': "$.albums.items[0].release_date"
+  'AssertObjectType': "$.albums.items[0].type"
+  'AssertTotalTracks': "$.albums.items[0].total_tracks"
+
+verifyAlbumDetailsVeerZaara:
+  'AssertAlbum': "$.albums.items[0].name"
+  'AssertAlbumId': "$.albums.items[0].id"
+  'AssertReleaseDate': "$.albums.items[0].release_date"
+  'AssertObjectType': "$.albums.items[0].type"
+  'AssertTotalTracks': "$.albums.items[0].total_tracks"
+
+verifyAlbumDetailsRHTDM:
+  'AssertAlbum': "$.albums.items[0].name"
+  'AssertAlbumId': "$.albums.items[0].id"
+  'AssertReleaseDate': "$.albums.items[0].release_date"
+  'AssertObjectType': "$.albums.items[0].type"
+  'AssertTotalTracks': "$.albums.items[0].total_tracks"

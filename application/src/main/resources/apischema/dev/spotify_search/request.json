@@ -1,0 +1,13 @@
+{
+  "base_path": "v1/search",
+  "header": {
+    "Authorization": "",
+    "Content-Type": "application/json"
+  },
+  "query_params": {
+    "q": "(search_param)",
+    "type": "(param_type)",
+    "market": "(market)",
+    "limit": "(limit)"
+  }
+}
