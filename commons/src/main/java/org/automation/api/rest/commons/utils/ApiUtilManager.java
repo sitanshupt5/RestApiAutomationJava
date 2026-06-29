@@ -222,8 +222,8 @@ public class ApiUtilManager {
                 Iterator<String> keys = jsonObject.keys();
                 while (keys.hasNext()) {
                     String key = keys.next();
-                    String value = jsonObject.getString(key);
-                    map.put(key, value);
+                    Object value = jsonObject.get(key);
+                    map.put(key, String.valueOf(value));
                 }
                 return map;
             }
