@@ -5,9 +5,9 @@
     "Content-Type": "application/json"
   },
   "query_params": {
-    "q": "(search_param)",
-    "type": "(param_type)",
-    "market": "(market)",
-    "limit": "(limit)"
+    "q": "{search_param}",
+    "type": "{param_type}",
+    "market": "{market}",
+    "limit": "{limit}"
   }
 }
