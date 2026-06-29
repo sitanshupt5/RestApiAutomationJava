@@ -71,22 +71,24 @@ tasks.register('cucumber', JavaExec) {
 
     doFirst {
         systemProperties(System.properties)
-        systemProperty("allure.results.directory", "build/allure-results")
+        systemProperty("allure.results.directory", "target/allure-results")
         String tags = System.getProperty("tags")
+        def cucumberArgs = [
+                '--plugin', 'pretty',
+                '--plugin', 'html:target/cucumber/cucumber-report.html',
+                '--plugin', 'json:target/cucumber.json',
+                '--plugin', 'io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm',
+                '--plugin', 'org.automation.api.rest.commons.listeners.CucumberListener',
+                '--glue', 'org.automation.api.rest.commons.stepdefs',
+                'classpath:features'
+        ]
         if (tags != null) {
-            setArgs([
-                    '--plugin', 'pretty',
-                    '--plugin', 'html:target/cucumber/cucumber-report.html',
-                    '--plugin', 'json:target/cucumber.json',
-                    '--plugin', 'io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm',
-                    '--plugin', 'org.automation.api.rest.commons.listeners.CucumberListener',
-                    '--tags', tags,
-                    '--glue', 'org.automation.api.rest.commons.stepdefs',
-                    'src/main/resources/features'
-            ])
+            cucumberArgs.addAll(['--tags', tags])
+        }
+        setArgs(cucumberArgs)
         }
     }
-}
+
 
 allure {
     version = "2.8.0"
