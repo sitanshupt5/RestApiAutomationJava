@@ -6,11 +6,13 @@ import io.cucumber.messages.internal.com.google.common.base.Strings;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import io.qameta.allure.Allure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Callable;
@@ -46,6 +48,17 @@ public class HttpResponseManager {
 
         try{
             response = doRequest(url, method).call();
+            Allure.addAttachment(
+                    "API Response",
+                    "application/json",
+                    response.asPrettyString(),
+                    ".json");
+
+            Allure.addAttachment(
+                    "Response Headers",
+                    "text/plain",
+                    response.getHeaders().toString(),
+                    ".txt");
             logger.info("\n"+response.statusCode()+"\n"+response.getHeaders().toString());
             logger.info(response.asPrettyString());
         }catch (RuntimeException e) {
@@ -192,6 +205,16 @@ public class HttpResponseManager {
         });
 
         logger.info("Request Body: \n"+requestBody+ "\n");
+
+        Allure.addAttachment(
+                "API Request",
+                "text/plain",
+                "Headers: " + header + "\n\n"
+                        + "Params: " + param + "\n\n"
+                        + "Query Params: " + queryParam + "\n\n"
+                        + "Form Params: " + formParams + "\n\n"
+                        + "Request Body:\n" + requestBody,
+                ".txt");
 
     }
 
