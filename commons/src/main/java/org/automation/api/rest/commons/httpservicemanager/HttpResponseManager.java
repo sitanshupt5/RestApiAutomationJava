@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Optional;
@@ -51,13 +52,13 @@ public class HttpResponseManager {
             Allure.addAttachment(
                     "API Response",
                     "application/json",
-                    response.asPrettyString(),
+                    new ByteArrayInputStream(response.asPrettyString().getBytes(StandardCharsets.UTF_8)),
                     ".json");
 
             Allure.addAttachment(
                     "Response Headers",
                     "text/plain",
-                    response.getHeaders().toString(),
+                    new ByteArrayInputStream(response.getHeaders().toString().getBytes(StandardCharsets.UTF_8)),
                     ".txt");
             logger.info("\n"+response.statusCode()+"\n"+response.getHeaders().toString());
             logger.info(response.asPrettyString());
@@ -203,17 +204,17 @@ public class HttpResponseManager {
             requestSpecification.queryParam(k,v);
             logger.info("Query Params ->" +k+" : "+v);
         });
-
-        logger.info("Request Body: \n"+requestBody+ "\n");
+        logger.info("Request Body: \n{}\n", requestBody);
+        requestBody = "Headers: " + header + "\n\n"
+                + "Params: " + param + "\n\n"
+                + "Query Params: " + queryParam + "\n\n"
+                + "Form Params: " + formParams + "\n\n"
+                + "Body:\n" + requestBody;
 
         Allure.addAttachment(
                 "API Request",
                 "text/plain",
-                "Headers: " + header + "\n\n"
-                        + "Params: " + param + "\n\n"
-                        + "Query Params: " + queryParam + "\n\n"
-                        + "Form Params: " + formParams + "\n\n"
-                        + "Request Body:\n" + requestBody,
+                new ByteArrayInputStream(requestBody.getBytes(StandardCharsets.UTF_8)),
                 ".txt");
 
     }
