@@ -1,10 +1,11 @@
 .gradle
 */build/
-.idea
+.idea/*
 /.idea
 /gradle
-*/logs
-*/target
+*/logs/*
+*/target/*
+*/target/allure-results/*
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/

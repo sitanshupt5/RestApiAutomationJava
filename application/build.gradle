@@ -70,8 +70,10 @@ tasks.register('cucumber', JavaExec) {
     classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
 
     doFirst {
+        def allureResultsDir = file("$projectDir/target/allure-results")
+        allureResultsDir.mkdirs()
         systemProperties(System.properties)
-        systemProperty("allure.results.directory", "target/allure-results")
+        systemProperty("allure.results.directory", allureResultsDir.absolutePath)
         String tags = System.getProperty("tags")
         def cucumberArgs = [
                 '--plugin', 'pretty',

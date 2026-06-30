@@ -73,9 +73,6 @@ public class Hooks {
                 throw new FileNotFoundException("file not found");
             }
         }
-        if (!scenario.getId().contains("manager_category") && !scenario.getId().contains("dei") && !scenario.getId().contains("position")) {
-            testManagerContext.getHttpRequest().initNewSpecification();
-        }
     }
 
     @After()
