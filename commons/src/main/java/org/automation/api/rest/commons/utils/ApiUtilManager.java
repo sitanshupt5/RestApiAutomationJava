@@ -239,7 +239,12 @@ public class ApiUtilManager {
 
     public Map<String, Object> getSchema(String schemaKey, String api) {
         String filePath = FilePaths.SCHEMA_MAPPING.replace(Entity.API_PATH, api).replace(Entity.ENV_TYPE, env);
-        YamlReaderUtils yamlReaderUtils = new YamlReaderUtils(ClassLoader.getSystemResourceAsStream(filePath));
+        filePath = filePath.startsWith("/") ? filePath.substring(1) : filePath;
+        InputStream inputStream = ClassLoader.getSystemResourceAsStream(filePath);
+        if (inputStream == null) {
+            throw new RuntimeException("Schema mapping file not found: " + filePath);
+        }
+        YamlReaderUtils yamlReaderUtils = new YamlReaderUtils(inputStream);
         return yamlReaderUtils.getYamlObj(schemaKey);
     }
 
