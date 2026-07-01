@@ -65,7 +65,13 @@ public class ApiUtilManager {
             } else {
                 request = defaults.get(Entity.REQUEST).toString();
             }
-            return request.replace("{RandomString}", getRandomAlphaString()).replace("{ID}", (String) testManagerContext.getScenarioContext().getContext(ApiContext.ID)).replace("{RandomUUID}", getUniqueCorrelationid()).replace("{currentdate}", DateUtils.getTodayDateInString());
+
+            request = replaceIfValuePresent(request,"{RandomString}", getRandomAlphaString());
+            request = replaceIfValuePresent(request, "{ID}", (String) testManagerContext.getScenarioContext().getContext(ApiContext.ID));
+            request = replaceIfValuePresent(request, "{RandomUUID}", getUniqueCorrelationid());
+            request = replaceIfValuePresent(request, "{currentdate}", DateUtils.getTodayDateInString());
+
+            return request;
         }
         return null;
     }
@@ -305,5 +311,9 @@ public class ApiUtilManager {
         ObjectMapper mapper = new ObjectMapper();
         ObjectReader updater = mapper.readerForUpdating(getDefaults(api).get(Entity.REQUEST));
         return new JSONObject(updater.readTree(mapper.writeValueAsString(getData(testManagerContext, dataset, api))).toPrettyString());
+    }
+
+    private String replaceIfValuePresent(String request, String placeholder, Object value) {
+        return value == null ? request : request.replace(placeholder, value.toString());
     }
 }

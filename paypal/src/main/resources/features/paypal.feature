@@ -2,7 +2,7 @@ Feature: Paypal Create and Retrieve
 
 
   @Smoke
-  Scenario Outline:  Validate search results for search parameter type artist for sceanrio "<Scenario>"
+  Scenario Outline:  Validate search results for search parameter type artist for scenario "<Scenario>"
     Given I have authorization token
     And I have API "<API>"
     And I set request body for "<RequestDataset>"
@@ -11,5 +11,5 @@ Feature: Paypal Create and Retrieve
     Then I verify attribute values match "<ValidationData>" in Response
     Examples:
       | API             | RequestDataset                      | ExpectedStatusCode  | ValidationData                      |
-      | create_product  | CreateProductRestApiAutomationJava  | 200                 | CreateProductRestApiAutomationJava  |
-      | create_product  | CreateProductRestApiAutomationPython| 200                 | CreateProductRestApiAutomationPython|
+      | create_product  | CreateProductRestApiAutomationJava  | 201                 | CreateProductRestApiAutomationJava  |
+      | create_product  | CreateProductRestApiAutomationPython| 201                 | CreateProductRestApiAutomationPython|
