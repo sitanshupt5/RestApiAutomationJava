@@ -15,12 +15,10 @@ import java.io.IOException;
 
 public class CommonWhenTestSteps {
 
+    private static final Logger logger = LoggerFactory.getLogger(CommonWhenTestSteps.class);
     HttpResponseManager httpResponseManager;
     TestManagerContext testManagerContext;
     RestRequestManager restRequestManager;
-
-    private static final Logger logger =
-            LoggerFactory.getLogger(CommonWhenTestSteps.class);
 
     public CommonWhenTestSteps(TestManagerContext context) {
         testManagerContext = context;
@@ -29,54 +27,27 @@ public class CommonWhenTestSteps {
     }
 
     @When("^the client performs (.+) request on API \\\"(.+)\\\"$")
-    public void perform_Http_Request(String httpMethod, String url)
-            throws Throwable {
-
+    public void perform_Http_Request(String httpMethod, String url) throws Throwable {
         httpResponseManager.setResponsePrefix("");
-
         ApiUtilManager apiUtilManager = new ApiUtilManager();
-
-        httpResponseManager.setResponse(
-                httpResponseManager.doRequest(
-                        httpMethod,
-                        apiUtilManager.getBasePath(url)));
+        httpResponseManager.setResponse(httpResponseManager.doRequest(httpMethod, apiUtilManager.getBasePath(url)));
     }
 
     @When("I call method {string}")
-    public void iCallMethodPOST(String httpMethod)
-            throws Exception {
-
+    public void iCallMethodPOST(String httpMethod) throws Exception {
         httpResponseManager.setResponsePrefix("");
-
-        String basePath =
-                (String) testManagerContext.getScenarioContext()
-                        .getContext(ApiContext.BASE_PATH);
-
-        httpResponseManager.setResponse(
-                httpResponseManager.doRequest(
-                        httpMethod,
-                        basePath));
-
+        String basePath = (String) testManagerContext.getScenarioContext().getContext(ApiContext.BASE_PATH);
+        httpResponseManager.setResponse(httpResponseManager.doRequest(httpMethod, basePath));
         iGetTheResponse();
     }
 
     @And("I get the response")
     public void iGetTheResponse() {
-
-        testManagerContext
-                .getScenarioContext()
-                .setContext(
-                        ApiContext.RESPONSE_BODY,
-                        httpResponseManager.getResponse().asString());
+        testManagerContext.getScenarioContext().setContext(ApiContext.RESPONSE_BODY, httpResponseManager.getResponse().asString());
     }
 
     @And("I save the initial response")
     public void iSaveTheInitialResponse() {
-
-        testManagerContext
-                .getScenarioContext()
-                .setContext(
-                        ApiContext.INITIAL_RESPONSE_BODY,
-                        httpResponseManager.getResponse().asString());
+        testManagerContext.getScenarioContext().setContext(ApiContext.INITIAL_RESPONSE_BODY, httpResponseManager.getResponse().asString());
     }
 }

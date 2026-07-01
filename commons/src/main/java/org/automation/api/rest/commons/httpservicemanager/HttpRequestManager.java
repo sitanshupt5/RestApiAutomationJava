@@ -22,8 +22,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 public class HttpRequestManager {
 
-    private static final Logger logger =
-            LoggerFactory.getLogger(HttpRequestManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(HttpRequestManager.class);
 
     public RestServiceConfigManager restConfig;
     public RequestSpecification specification;
@@ -32,34 +31,18 @@ public class HttpRequestManager {
     private String requestBody;
 
     public HttpRequestManager(ConfigManager configManager) {
-        this.restConfig =
-                new RestServiceConfigManager(configManager);
+        this.restConfig = new RestServiceConfigManager(configManager);
         this.configManager = configManager;
         specification = RestAssured.given();
     }
 
     public void onCreate() {
-
-        Optional<String> baseUri =
-                Optional.of(configManager.getEnvProperty(
-                        ConfigConstants.BASE_URI));
-
+        Optional<String> baseUri = Optional.of(configManager.getEnvProperty(ConfigConstants.BASE_URI));
         baseUri.ifPresent(this::baseUrl);
-
-        Optional<String> proxy =
-                Optional.ofNullable(configManager.getEnvProperty(
-                        ConfigConstants.PROXY));
-
-        boolean urlEncodingEnabled =
-                configManager.getBoolean(
-                        ConfigConstants.URL_ENCODING_ENABLED);
-
+        Optional<String> proxy = Optional.ofNullable(configManager.getEnvProperty(ConfigConstants.PROXY));
+        boolean urlEncodingEnabled = configManager.getBoolean(ConfigConstants.URL_ENCODING_ENABLED);
         specification.urlEncodingEnabled(urlEncodingEnabled);
-
-        boolean relaxedHttps =
-                configManager.getBoolean(
-                        ConfigConstants.RELAXED_HTTPS);
-
+        boolean relaxedHttps = configManager.getBoolean(ConfigConstants.RELAXED_HTTPS);
         if (relaxedHttps) {
             specification.relaxedHTTPSValidation();
             HttpsCertTrust.trustAllHttpsCertificates();
@@ -68,10 +51,7 @@ public class HttpRequestManager {
 
     public void initNewSpecification() {
         try {
-            specification =
-                    RestAssured.given()
-                            .config(restConfig.getConfig());
-
+            specification = RestAssured.given().config(restConfig.getConfig());
             waitCondition = null;
             onCreate();
 
@@ -84,22 +64,15 @@ public class HttpRequestManager {
         specification.param(key, value);
     }
 
-    public void queryParam(
-            String parameterName,
-            String parameterValue) {
-
+    public void queryParam(String parameterName, String parameterValue) {
         try {
-            parameterValue =
-                    URLEncoder.encode(parameterValue, "UTF-8");
+            parameterValue = URLEncoder.encode(parameterValue, "UTF-8");
 
         } catch (UnsupportedEncodingException e) {
             // do nothing
         }
-
         if (!parameterValue.equalsIgnoreCase("null")) {
-            specification.queryParam(
-                    parameterName,
-                    parameterValue);
+            specification.queryParam(parameterName, parameterValue);
         }
     }
 
@@ -108,10 +81,7 @@ public class HttpRequestManager {
     }
 
     public void baseUrl(String baseUrl) {
-        configManager.put(
-                ConfigConstants.BASE_URI,
-                baseUrl);
-
+        configManager.put(ConfigConstants.BASE_URI, baseUrl);
         specification.baseUri(baseUrl);
     }
 
@@ -119,29 +89,18 @@ public class HttpRequestManager {
         specification.contentType(contentType);
     }
 
-    public void cookie(
-            String cookieName,
-            String cookieValue) {
-
+    public void cookie(String cookieName, String cookieValue) {
         specification.cookie(cookieName, cookieValue);
     }
 
-    public void header(
-            String headerName,
-            String headerValue) {
-
+    public void header(String headerName, String headerValue) {
         specification.header(headerName, headerValue);
     }
 
-    public void proxy(
-            String scheme,
-            String host,
-            Integer port) {
-
+    public void proxy(String scheme, String host, Integer port) {
         if (port == null) {
             port = 80;
         }
-
         specification.proxy(host, port, scheme);
     }
 
@@ -149,13 +108,8 @@ public class HttpRequestManager {
         specification.sessionId(sessionIdValue);
     }
 
-    public void sessionId(
-            String sessionIdName,
-            String sessionIdValue) {
-
-        specification.sessionId(
-                sessionIdName,
-                sessionIdValue);
+    public void sessionId(String sessionIdName, String sessionIdValue) {
+        specification.sessionId(sessionIdName, sessionIdValue);
     }
 
     public void filter(Filter filter) {
@@ -166,85 +120,33 @@ public class HttpRequestManager {
         specification.filters(filters);
     }
 
-    public void authentication(
-            String username,
-            String password) {
-
-        configManager.put(
-                ConfigConstants.USERNAME,
-                username);
-
-        configManager.put(
-                ConfigConstants.PASSWORD,
-                password);
+    public void authentication(String username, String password) {
+        configManager.put(ConfigConstants.USERNAME, username);
+        configManager.put(ConfigConstants.PASSWORD, password);
     }
 
-    public void basicAuthentication(
-            String username,
-            String password) {
-
-        specification.auth()
-                .preemptive()
-                .basic(username, password);
+    public void basicAuthentication(String username, String password) {
+        specification.auth().preemptive().basic(username, password);
     }
 
-    public void authenticationType(
-            String authenticationType) {
-
-        configManager.put(
-                ConfigConstants.AUTH_TYPE,
-                authenticationType);
+    public void authenticationType(String authenticationType) {
+        configManager.put(ConfigConstants.AUTH_TYPE, authenticationType);
     }
 
     public RequestSpecification value() {
         return specification;
     }
 
-    public void shouldWaitWithIntervalUntilStatusCodeReceived(
-            TimeUtil waitTime,
-            TimeUtil interval,
-            int code) {
-
-        this.waitCondition =
-                new WaitCondition(
-                        waitTime,
-                        interval,
-                        ApiResponseMatcher.aStatusCode(
-                                equalTo(code)));
+    public void shouldWaitWithIntervalUntilStatusCodeReceived(TimeUtil waitTime, TimeUtil interval, int code) {
+        this.waitCondition = new WaitCondition(waitTime, interval, ApiResponseMatcher.aStatusCode(equalTo(code)));
     }
 
-    public void shouldWaitWithIntervalUntilHeaderEqualToValue(
-            TimeUtil waitTime,
-            TimeUtil interval,
-            String header,
-            String value) {
-
-        this.waitCondition =
-                new WaitCondition(
-                        waitTime,
-                        interval,
-                        ApiResponseMatcher.aHeader(
-                                header,
-                                equalTo(value)));
+    public void shouldWaitWithIntervalUntilHeaderEqualToValue(TimeUtil waitTime, TimeUtil interval, String header, String value) {
+        this.waitCondition = new WaitCondition(waitTime, interval, ApiResponseMatcher.aHeader(header, equalTo(value)));
     }
 
-    public void shouldWaitWithIntervalUntilHeaderEqualToValue(
-            TimeUtil waitTime,
-            TimeUtil interval,
-            String header,
-            String value,
-            String failValue) {
-
-        this.waitCondition =
-                new WaitCondition(
-                        waitTime,
-                        interval,
-                        ApiResponseMatcher.aHeader(
-                                header,
-                                equalTo(value)),
-                        ApiResponseMatcher.aHeader(
-                                header,
-                                equalTo(failValue)));
+    public void shouldWaitWithIntervalUntilHeaderEqualToValue(TimeUtil waitTime, TimeUtil interval, String header, String value, String failValue) {
+        this.waitCondition = new WaitCondition(waitTime, interval, ApiResponseMatcher.aHeader(header, equalTo(value)), ApiResponseMatcher.aHeader(header, equalTo(failValue)));
     }
 
     public WaitCondition awaitCondition() {
@@ -259,57 +161,24 @@ public class HttpRequestManager {
         return value();
     }
 
-    public void formParam(
-            String parameterName,
-            String parameterValue) {
-
-        specification().formParam(
-                parameterName,
-                parameterValue);
+    public void formParam(String parameterName, String parameterValue) {
+        specification().formParam(parameterName, parameterValue);
     }
 
-    public void multiPart(
-            String contentBody,
-            String controlName) {
-
-        specification()
-                .multiPart(controlName, contentBody);
+    public void multiPart(String contentBody, String controlName) {
+        specification().multiPart(controlName, contentBody);
     }
 
-    public void multiPart(
-            byte[] contentBody,
-            String controlName) {
-
-        specification()
-                .multiPart(
-                        controlName,
-                        "file.txt",
-                        contentBody);
+    public void multiPart(byte[] contentBody, String controlName) {
+        specification().multiPart(controlName, "file.txt", contentBody);
     }
 
-    public void multiPart(
-            String contentBody,
-            String controlName,
-            String mimeType) {
-
-        specification()
-                .multiPart(
-                        controlName,
-                        contentBody,
-                        mimeType);
+    public void multiPart(String contentBody, String controlName, String mimeType) {
+        specification().multiPart(controlName, contentBody, mimeType);
     }
 
-    public void multiPart(
-            byte[] contentBody,
-            String controlName,
-            String mimeType) {
-
-        specification()
-                .multiPart(
-                        controlName,
-                        "file.txt",
-                        contentBody,
-                        mimeType);
+    public void multiPart(byte[] contentBody, String controlName, String mimeType) {
+        specification().multiPart(controlName, "file.txt", contentBody, mimeType);
     }
 
     public void body(String body) {
