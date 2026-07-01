@@ -90,7 +90,7 @@ public class HttpResponseManager {
         return () -> {
             final Matcher matcher = replacePlaceHolderPattern.matcher(url);
             authenticate();
-            String base_uri = world.getEnvProperty(ConfigConstants.ENTITY_HOST_URI);
+            String base_uri = world.getEnvProperty(ConfigConstants.BASE_URI);
             Boolean proxy_disabled = world.getBoolean(ConfigConstants.ENTITY_PROXY_SET);
 
             if (!Strings.isNullOrEmpty(base_uri)) {
