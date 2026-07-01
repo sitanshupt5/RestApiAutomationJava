@@ -1,0 +1,11 @@
+{
+  "base_path": "api/token",
+  "header": {
+    "Authorization": "",
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  "request": {
+    "grant_type": "client_credentials"
+  }
+
+}

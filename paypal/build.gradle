@@ -40,7 +40,7 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.4.0'
 }
 
-group = 'org.automation.api.rest.application'
+group = 'org.automation.api.rest.paypal'
 version = '1.0-SNAPSHOT'
 sourceCompatibility = '11'
 targetCompatibility = '11'
@@ -88,8 +88,8 @@ tasks.register('cucumber', JavaExec) {
             cucumberArgs.addAll(['--tags', tags])
         }
         setArgs(cucumberArgs)
-        }
     }
+}
 
 
 allure {

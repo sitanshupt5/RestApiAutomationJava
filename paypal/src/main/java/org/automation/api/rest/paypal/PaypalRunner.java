@@ -1,4 +1,4 @@
-package org.automation.api.rest.application;
+package org.automation.api.rest.paypal;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -17,6 +17,6 @@ import org.junit.runner.RunWith;
                 "org.automation.api.rest.commons.listeners.CucumberListener"
         }
 )
-public class Runner {
+public class PaypalRunner {
 
 }

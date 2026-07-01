@@ -1,0 +1,14 @@
+CreateProductRestApiAutomationJava:
+  'AssertRegexProductId': "id"
+  'AssertProductName': "name"
+  'AssertContainsProductDescription': "description"
+  'AssertProductType': "type"
+  'AssertProductCategory': "category"
+  'AssertContainsGetUrl': "links[?(@.method=='GET')].href"
+
+CreateProductRestApiAutomationPython:
+  'AssertRegexProductId': "id"
+  'AssertProductName': "name"
+  'AssertContainsProductDescription': "description"
+  'AssertProductType': "type"
+  'AssertProductCategory': "category"

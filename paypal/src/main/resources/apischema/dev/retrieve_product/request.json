@@ -1,0 +1,7 @@
+{
+  "base_path": "v1/catalogs/products/{product_id}",
+  "header": {
+    "Authorization": "",
+    "Content-Type": "application/json"
+  }
+}

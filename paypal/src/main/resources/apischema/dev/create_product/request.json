@@ -1,0 +1,16 @@
+{
+  "base_path": "v1/catalogs/products",
+  "header": {
+    "Authorization": "",
+    "Content-Type": "application/json",
+    "Prefer": "return=representation"
+  },
+  "request": {
+    "name": "{product_name}",
+    "description": "{product_description}",
+    "type": "{product_type}",
+    "category": "{product_category}",
+    "image_url": "{image_url}",
+    "home_url": "{home_url}"
+  }
+}
